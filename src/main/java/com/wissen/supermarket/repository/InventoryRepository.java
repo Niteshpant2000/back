@@ -18,4 +18,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, String>{
     // GET INVENTORY LIST ACCORDING TO ORDER OF NAME
 	@Query(value="select * from inventory order by name", nativeQuery=true)
 	public List<Inventory> filterByName(String name);
+
+	
 }

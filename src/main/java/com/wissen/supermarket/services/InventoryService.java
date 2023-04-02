@@ -28,7 +28,7 @@ public class InventoryService {
     }
 
     // update Product
-    public String updateInventory(Inventory productObj){
+    public String updateInventory(Inventory productObj, boolean check){
         Optional<Inventory> product = inventoryRepository.findById(productObj.getId());
         if(product.isPresent()){
             Inventory productToUpdate=product.get();
@@ -38,7 +38,19 @@ public class InventoryService {
             productToUpdate.setRating(productObj.getRating());
             productToUpdate.setManufacturer(productObj.getManufacturer());
             productToUpdate.setDiscount(productObj.getDiscount());
-            productToUpdate.setQuantity(productObj.getQuantity());
+            
+            /* updating product quantity 
+                (true, +) -> Adding more products to exsisting inventory
+                (false, -) -> Removing products, bought by customers
+            */
+            long temp=productToUpdate.getQuantity();
+            if(check == true){
+                productToUpdate.setQuantity(temp + productObj.getQuantity());
+            }
+            else{
+                productToUpdate.setQuantity(productObj.getQuantity());
+            }
+
             inventoryRepository.save(productToUpdate);
             return "Product details have been updated successfully.";
         }
@@ -49,6 +61,11 @@ public class InventoryService {
 
     // add Product
     public void addProduct(Inventory product){
+        Optional<Inventory> checkProduct=inventoryRepository.findById(product.getId());
+        if(checkProduct.isPresent()){
+            this.updateInventory(product, true);
+            return;
+        }
         inventoryRepository.save(product);
     }
 

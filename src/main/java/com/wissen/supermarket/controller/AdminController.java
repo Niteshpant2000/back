@@ -23,8 +23,8 @@ import com.wissen.supermarket.services.TransactionService;
 import com.wissen.supermarket.transaction.Transaction;
 
 @RestController
-@RequestMapping(value="/api/data")
-public class Controller {
+@RequestMapping(value="/api/admin")
+public class AdminController {
 
 	@Autowired
 	InventoryService inventoryService;

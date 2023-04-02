@@ -27,9 +27,17 @@ public class TransactionService {
         Optional<Transaction> transaction = transactionRepository.findById(id);
         return transaction;
     }
+
+    //get Transaction by customer id
+    public List<Transaction> getTransactionByCustomerId(long n){
+        List<Transaction> t=transactionRepository.getTransactionByCustomerId(n);
+        return t;
+    }
     
     // add Transaction
     public void addTransaction(Transaction newTransaction){
+        long n= this.getAllTransaction().size();
+        newTransaction.setId(n+"");
         transactionRepository.save(newTransaction);
     }
 }

@@ -1,7 +1,4 @@
 package com.wissen.supermarket.transaction;
-
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,7 +12,7 @@ public class Transaction {
     private String id;
 
     @Column(name="customerId")
-    private String customerId;
+    private long customerId;
 
     @Column(name="dateTime")
     private String dateTime;
@@ -33,7 +30,7 @@ public class Transaction {
 
     public Transaction(){}
 
-    public Transaction(String id, String customerId, String dateTime, String productDetails, double totalAmount, String paymentType){
+    public Transaction(String id, long customerId, String dateTime, String productDetails, double totalAmount, String paymentType){
         this.id = id;
         this.customerId = customerId;
         this.dateTime = dateTime;
@@ -47,7 +44,7 @@ public class Transaction {
     public String getId(){
         return this.id;
     }
-    public String getCustomerId(){
+    public long getCustomerId(){
         return this.customerId;
     }
     
@@ -73,9 +70,7 @@ public class Transaction {
         this.id = id;
     }
 
-
-
-    public void setCustomerId(String customerId){
+    public void setCustomerId(long customerId){
         this.customerId = customerId;
     }
 

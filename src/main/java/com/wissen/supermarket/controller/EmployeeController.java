@@ -23,8 +23,8 @@ import com.wissen.supermarket.services.TransactionService;
 import com.wissen.supermarket.transaction.Transaction;
 
 @RestController
-@RequestMapping(value="/api/data")
-public class Controller {
+@RequestMapping(value="/api/employee")
+public class EmployeeController {
 
 	@Autowired
 	InventoryService inventoryService;
@@ -58,54 +58,8 @@ public class Controller {
 		}
 		return new Inventory();
 	}
-	
-	// update Inventory
-	@PutMapping(path="/updateInventory/{check}")
-	String updateInventory(@RequestBody Inventory prodObj, @PathVariable boolean check) {		
-		return inventoryService.updateInventory(prodObj, check);
-	}
 
-	// remove a product
-	@DeleteMapping(path="/removeProduct/{productId}")
-	public String removeProduct(@PathVariable String productId) {
-		return inventoryService.removeProduct(productId);
-	}
 	
-	// create a new product
-	@PostMapping(path="/addProduct")
-	String addProduct(@RequestBody Inventory invObj) {
-		inventoryService.addProduct(invObj);
-		return "Product Added Successfully";
-	}
-
-	// get all employee
-	@GetMapping(path="/getEmployee")
-	List<Employee> getEmployee(){
-		List<Employee> employeeList = employeeService.getAllEmployee();
-		if(employeeList.size() == 0)
-			return employeeList;		// change this
-		else
-			return employeeList;
-	}
-
-	// create a new employee
-	@PostMapping(path="/addEmployee")
-	String addEmployee(@RequestBody Employee cashier) {
-		employeeService.addEmployee(cashier);
-		return "Employee Inserted Successfully";
-	}
-	
-	// remove an Employee
-	@DeleteMapping(path="/removeEmployee/{empId}")
-	public String removeEmployee(@PathVariable String empId) {
-		return employeeService.removeEmployee(empId);
-	}
-	
-	// update Employee Details
-	@PutMapping(path="/updateEmployee")
-	String updateEmployee(@RequestBody Employee cashier) {
-		return employeeService.updateEmployee(cashier);
-	}
 
 	// get all customer
 	@GetMapping(path="/getCustomer")
